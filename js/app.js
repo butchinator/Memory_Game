@@ -10,6 +10,12 @@ const deck = document.querySelector('.deck');
 let openedCards = [];
 let matchedCards = [];
 
+let moves = 0;
+let movesCount = document.querySelector('.moves');
+
+let score = document.querySelector('.stars');
+let stars = score.querySelectorAll('li');
+
 console.log(cardList);
 
 
@@ -48,24 +54,49 @@ for (let i = 0; i < cards.length; i++) {
 }
 console.log(cards);
 
+//event listener to turn cards
 deck.addEventListener('click', function(event) {
     if (event.target.className === "card" && openedCards.length < 2) {
         turnCard(event);
         addOpenedCard(event);
     } else {
-        event.stopPropagation();
+        // event.stopPropagation();
+        console.log('2 cards open');
     };
 });
 
+// add classes to show cards
 function turnCard(event) {
     event.target.classList.toggle('open');
     event.target.classList.toggle('show');
 }
 
+// add to openedCards array
 function addOpenedCard(event) {
     openedCards.push(event.target);
+    console.log(openedCards[0].innerHTML);
+    console.log(openedCards[1].innerHTML);
+    if (openedCards[0].innerHTML === openedCards[1].innerHTML) {
+        matchedCard();
+    } else {
+
+    };
 }
 
+
+
+function matchedCard() {
+    openedCards[0].classList.remove('open', 'show');
+    openedCards[1].classList.remove('open', 'show');
+    openedCards[0].classList.toggle('match');
+    openedCards[1].classList.toggle('match');
+    matchedCards.push(openedCards);
+    console.log(matchedCards);
+}
+
+function notMatchedCard() {
+    
+}
 
 /*
  * Display the cards on the page

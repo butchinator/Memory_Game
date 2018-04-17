@@ -16,6 +16,13 @@ let movesCount = document.querySelector('.moves');
 let score = document.querySelector('.stars');
 let stars = score.querySelectorAll('li');
 
+let timer = document.querySelector('#timer');
+let time;
+let sec = 0;
+let min = 0;
+
+let clickedCard;
+
 console.log(cardList);
 
 
@@ -56,46 +63,91 @@ console.log(cards);
 
 //event listener to turn cards
 deck.addEventListener('click', function(event) {
-    if (event.target.className === "card" && openedCards.length < 2) {
+    clickedCard = event.target;
+    if (clickedCard.className === "card" && openedCards.length < 2) {
         turnCard(event);
         addOpenedCard(event);
     } else {
-        // event.stopPropagation();
+        event.stopPropagation();
         console.log('2 cards open');
     };
 });
 
-// add classes to show cards
+// add classes to clicked cards
 function turnCard(event) {
-    event.target.classList.toggle('open');
-    event.target.classList.toggle('show');
+    clickedCard.classList.toggle('open');
+    clickedCard.classList.toggle('show');
 }
 
 // add to openedCards array
 function addOpenedCard(event) {
     openedCards.push(event.target);
-    console.log(openedCards[0].innerHTML);
-    console.log(openedCards[1].innerHTML);
-    if (openedCards[0].innerHTML === openedCards[1].innerHTML) {
-        matchedCard();
-    } else {
-
-    };
+    if (openedCards.length == 2) {
+        addMove()
+        if (moves == 1) {
+            startTime()
+        }
+        if (openedCards[0].innerHTML === openedCards[1].innerHTML) {
+            matchedCard();
+            endGame();
+        } else {
+            noMatchedCard()
+            console.log(openedCards);
+        };
+    }
 }
 
 
-
+// if the cards match
 function matchedCard() {
     openedCards[0].classList.remove('open', 'show');
     openedCards[1].classList.remove('open', 'show');
     openedCards[0].classList.toggle('match');
     openedCards[1].classList.toggle('match');
     matchedCards.push(openedCards);
-    console.log(matchedCards);
+    console.log(matchedCards.length);
+    clearCards();
+    console.log(openedCards);
 }
 
-function notMatchedCard() {
-    
+// if the cards do not match
+function noMatchedCard() {
+    setTimeout (function() {
+        openedCards[0].classList.remove('open', 'show');
+        openedCards[1].classList.remove('open', 'show');
+        clearCards();
+        console.log(openedCards);
+    }, 800);
+}
+
+// clear openedCards array
+function clearCards() {
+    openedCards = [];
+}
+
+function addMove() {
+    moves++;
+    movesCount.innerHTML = moves;
+}
+
+function endGame() {
+    if (matchedCards.length === 8) {
+        alert("the game is over");
+    }
+}
+
+function startTime() {
+    time = setInterval (function() {
+        sec++
+        if (sec < 10) {
+            sec = '0' + sec;
+        };
+        if (sec === 60) {
+            min++
+            sec = 0;
+        };
+        timer.innerHTML = min + ':' + sec;
+    }, 1000);
 }
 
 /*

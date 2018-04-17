@@ -1,9 +1,18 @@
 /*
  * Create a list that holds all of your cards
  */
- let cardsArray = ['fa-diamond', 'fa-paper-plane-o', 'fa-anchor', 'fa-bolt', 'fa-cube', 'fa-anchor', 'fa-leaf', 'fa-bicycle', 'fa-diamond', 'fa-paper-plane-o', 'fa-anchor', 'fa-bolt', 'fa-cube', 'fa-anchor', 'fa-leaf', 'fa-bicycle']
 
- var deck = document.querySelector(".deck");
+let card = document.querySelectorAll('.card');
+let cardList = Array.from(card);
+
+const deck = document.querySelector('.deck');
+
+let openedCards = [];
+let matchedCards = [];
+
+console.log(cardList);
+
+
 
 /*
 
@@ -29,6 +38,35 @@ function shuffle(array) {
     return array;
 }
 
+let cards = shuffle(cardList);
+console.log(cards);
+
+//create list of cards
+for (let i = 0; i < cards.length; i++) {
+    cards[i].classList.remove('open', 'show', 'match');
+    deck.appendChild(cards[i]);
+}
+console.log(cards);
+
+deck.addEventListener('click', function(event) {
+    if (event.target.className === "card" && openedCards.length < 2) {
+        turnCard(event);
+        addOpenedCard(event);
+    } else {
+        event.stopPropagation();
+    };
+});
+
+function turnCard(event) {
+    event.target.classList.toggle('open');
+    event.target.classList.toggle('show');
+}
+
+function addOpenedCard(event) {
+    openedCards.push(event.target);
+    console.log(openedCards);
+}
+
 
 /*
  * Display the cards on the page
@@ -36,29 +74,6 @@ function shuffle(array) {
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
-function createCards() {
-    deck.innerHTML = "";
-    
-    for (let i = 0; i < cardsArray.length; i++) {
-        let card = document.createElement('li');
-        card.classList.add('card');
-        let icon = document.createElement('i');
-        icon.setAttribute('class', 'fa');
-        card.append(icon);
-        deck.append(card);
-    }
-
-    let shuffledCards = shuffle(cardsArray);
-    let cardItems = document.querySelectorAll('.card .fa');
-    for (let j = 0; j < cardsArray.length; j++) {
-        cardItems[j].classList.add(shuffledCards[j]);
-     }
-}
-
-createCards();
-
-
-
 
 
 

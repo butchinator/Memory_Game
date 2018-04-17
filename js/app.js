@@ -64,7 +64,6 @@ function turnCard(event) {
 
 function addOpenedCard(event) {
     openedCards.push(event.target);
-    console.log(openedCards);
 }
 
 

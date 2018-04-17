@@ -11,12 +11,12 @@ let openedCards = [];
 let matchedCards = [];
 
 let moves = 0;
-let movesCount = document.querySelector('.moves');
+const movesCount = document.querySelector('.moves');
 
-let score = document.querySelector('.stars');
+const score = document.querySelector('.stars');
 let stars = score.querySelectorAll('li');
 
-let timer = document.querySelector('#timer');
+const timer = document.querySelector('#timer');
 let time;
 let sec = 0;
 let min = 0;
@@ -24,7 +24,6 @@ let min = 0;
 let clickedCard;
 
 console.log(cardList);
-
 
 
 /*
@@ -125,17 +124,20 @@ function clearCards() {
     openedCards = [];
 }
 
+// add moves
 function addMove() {
     moves++;
     movesCount.innerHTML = moves;
 }
 
+// end game funcionality
 function endGame() {
     if (matchedCards.length === 8) {
-        alert("the game is over");
+        stopTime()
     }
 }
 
+// start the timer
 function startTime() {
     time = setInterval (function() {
         sec++
@@ -149,6 +151,15 @@ function startTime() {
         timer.innerHTML = min + ':' + sec;
     }, 1000);
 }
+
+// stop the timer
+function stopTime() {
+    clearInterval(time);
+    sec = 0;
+    min = 0;
+}
+
+
 
 /*
  * Display the cards on the page

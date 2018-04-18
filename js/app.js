@@ -23,6 +23,10 @@ let min = 0;
 
 let clickedCard;
 
+const modal = document.getElementById('myModal');
+const close = document.querySelector('.close');
+
+
 console.log(cardList);
 
 
@@ -53,6 +57,8 @@ function shuffle(array) {
 let cards = shuffle(cardList);
 console.log(cards);
 
+
+
 //create list of cards
 for (let i = 0; i < cards.length; i++) {
     cards[i].classList.remove('open', 'show', 'match');
@@ -60,7 +66,7 @@ for (let i = 0; i < cards.length; i++) {
 }
 console.log(cards);
 
-//event listener to turn cards
+//event listener to click cards
 deck.addEventListener('click', function(event) {
     clickedCard = event.target;
     if (clickedCard.className === "card" && openedCards.length < 2) {
@@ -72,20 +78,22 @@ deck.addEventListener('click', function(event) {
     };
 });
 
-// add classes to clicked cards
+// add classes to turn cards
 function turnCard(event) {
     clickedCard.classList.toggle('open');
     clickedCard.classList.toggle('show');
-}
+};
 
 // add to openedCards array
 function addOpenedCard(event) {
-    openedCards.push(event.target);
+    openedCards.push(clickedCard);
     if (openedCards.length == 2) {
+        console.log(moves)
         addMove()
         if (moves == 1) {
             startTime()
         }
+        starRating()
         if (openedCards[0].innerHTML === openedCards[1].innerHTML) {
             matchedCard();
             endGame();
@@ -93,8 +101,8 @@ function addOpenedCard(event) {
             noMatchedCard()
             console.log(openedCards);
         };
-    }
-}
+    };
+};
 
 
 // if the cards match
@@ -107,7 +115,7 @@ function matchedCard() {
     console.log(matchedCards.length);
     clearCards();
     console.log(openedCards);
-}
+};
 
 // if the cards do not match
 function noMatchedCard() {
@@ -117,25 +125,26 @@ function noMatchedCard() {
         clearCards();
         console.log(openedCards);
     }, 800);
-}
+};
 
 // clear openedCards array
 function clearCards() {
     openedCards = [];
-}
+};
 
 // add moves
 function addMove() {
     moves++;
     movesCount.innerHTML = moves;
-}
+};
 
 // end game funcionality
 function endGame() {
     if (matchedCards.length === 8) {
         stopTime()
-    }
-}
+        openModal();
+    };
+};
 
 // start the timer
 function startTime() {
@@ -150,15 +159,38 @@ function startTime() {
         };
         timer.innerHTML = min + ':' + sec;
     }, 1000);
-}
+};
 
 // stop the timer
 function stopTime() {
     clearInterval(time);
     sec = 0;
     min = 0;
-}
+};
 
+// star rating
+function starRating() {
+    for (let star of stars) {
+        if (moves >= 12  && moves <= 18) {
+            score.children[2].classList.add('hide');
+        } else if (moves > 19 && moves <= 24) {
+            score.children[1].classList.add('hide');
+        } else if (moves > 24) {
+            score.children[0].classList.add('hide');
+        };
+    };
+};
+
+function openModal() {
+    modal.style.display = "block";
+    closeModal()
+};
+
+function closeModal() {
+    close.addEventListener('click', function() {
+        modal.style.display = "none";
+    });
+};
 
 
 /*

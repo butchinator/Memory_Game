@@ -146,7 +146,7 @@ function addMove() {
     };
 };
 
-// start the timer
+// start the timer - inspiration from https://www.youtube.com/watch?v=KK7EH8h97jU
 function startTime() {
     time = setInterval (function() {
         sec++

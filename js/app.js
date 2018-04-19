@@ -1,18 +1,15 @@
-/*
- * Create a list that holds all of your cards
- */
-
+// declare variables
 let card = document.querySelectorAll('.card');
 let cardList = Array.from(card);
 
 const deck = document.querySelector('.deck');
-
+let clickedCard;
 let openedCards = [];
 let matchedCards = [];
 
 let moves;
 const movesCount = document.querySelector('.moves');
-const moveSpan = document.querySelector('.moveSpan');
+const moveSpan = document.querySelector('.move-span');
 
 const score = document.querySelector('.stars');
 const stars = score.querySelectorAll('li');
@@ -22,28 +19,19 @@ const finalMoves =  document.querySelector('.finalMoves');
 let starsScore;
 let endMessage;
 
-const restart = document.querySelector('.restart');
-restart.addEventListener('click', gameStart);
-const tryAgain = document.querySelector('.tryAgain');
-
 const timer = document.querySelector('#timer');
 let time;
 let sec = 0;
 let min = 0;
 
-let clickedCard;
-
 const myModal = document.getElementById('myModal');
 const close = document.querySelector('.close');
 
-/*
+const restart = document.querySelector('.restart');
+restart.addEventListener('click', gameStart);
+const tryAgain = document.querySelector('.tryAgain');
 
-deck.addEventListener("click", function(event){
-if (event.target.classList.contains("card")){
- event.target.style.transform = "rotateY(-180deg)";
-}
-});
-*/
+
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -73,6 +61,7 @@ function gameStart() {
         star.classList.remove('hide');
       }
     matchedCards.length = 0;
+    // shuffle cards
     let cards = shuffle(cardList);
     //create list of cards
     for (let i = 0; i < cards.length; i++) {
@@ -157,15 +146,6 @@ function addMove() {
     };
 };
 
-// end game functionality
-function endGame() {
-    if (matchedCards.length === 8) {
-        stopTime()
-        openModal();
-        restartGame();
-    };
-};
-
 // start the timer
 function startTime() {
     time = setInterval (function() {
@@ -175,7 +155,7 @@ function startTime() {
         };
         if (sec === 60) {
             min++
-            sec = 0;
+            sec = 00;
         };
         timer.innerHTML = min + ':' + sec;
     }, 1000);
@@ -201,15 +181,12 @@ function starRating() {
     };
 };
 
-// message shown on game completion
-function finalMessage() {
-    endMessage = document.querySelector('.message');
-    if (moves <= 14) {
-        endMessage.innerHTML = "Superstar!!!"
-    } else if (moves > 14 && moves < 24) {
-        endMessage.innerHTML = "Almost! Keep it up!"
-    } else if (moves >= 24) {
-        endMessage.innerHTML = "Unlucky! You can do better!!"
+// end game functionality
+function endGame() {
+    if (matchedCards.length === 8) {
+        stopTime()
+        openModal();
+        restartGame();
     };
 };
 
@@ -222,6 +199,18 @@ function openModal() {
     finalMoves.innerHTML = movesCount.innerHTML;
     timeTaken.innerHTML = timer.innerHTML;
     closeModal();
+};
+
+// message shown on game completion
+function finalMessage() {
+    endMessage = document.querySelector('.message');
+    if (moves <= 14) {
+        endMessage.innerHTML = "Superstar!!!"
+    } else if (moves > 14 && moves < 24) {
+        endMessage.innerHTML = "So close! Keep it up!"
+    } else if (moves >= 24) {
+        endMessage.innerHTML = "Unlucky! You can do better!!"
+    };
 };
 
 // close the popup

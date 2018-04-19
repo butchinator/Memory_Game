@@ -26,6 +26,7 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    flex-wrap: wrap;
 }
 
 h1 {
@@ -39,7 +40,7 @@ h1 {
 
 .deck {
     width: 660px;
-    min-height: 680px;
+    height: 680px;
     background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
     padding: 32px;
     border-radius: 10px;
@@ -90,9 +91,11 @@ h1 {
  */
 
 .score-panel {
-    text-align: left;
     width: 345px;
-    margin-bottom: 10px;
+    margin-bottom: 7px;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
 }
 
 .score-panel .stars {
@@ -115,6 +118,10 @@ h1 {
 
 .score-panel .stars .hide {
     display: none;
+}
+
+.move-span {
+    margin-left: -20px;
 }
 
 /* Styles for the modal */
@@ -167,10 +174,10 @@ h1 {
 }
 
 .finalMessage {
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: relative;
 }
 
 .score {
@@ -179,9 +186,9 @@ h1 {
 
 .finalScore {
     list-style: none;
-    display: flex;
     color: #f2b01e;
     margin-left: 2px;
+    display: flex;
 }
 
 .stats .finalStars .finalScore .hide {
@@ -288,3 +295,114 @@ animation-name: rubberBand;
 }
 
   
+/* media queries */
+
+@media screen and (min-width: 705px) {
+    h1 {
+      font-size: 3em;
+    }
+    .score-panel {
+      font-size: 1.4em;
+    }
+}
+
+@media screen and (min-width: 601px) and (max-width: 704px) {
+    .deck {
+        width: 85%;
+        height: 35em;
+        padding: 1em;
+    }
+
+    .deck .card {
+        height: 115px;
+        width: 115px;
+    }
+
+    .move-span {
+        position: absolute;
+        left: 165px
+    }
+
+}
+
+@media screen and (min-width: 501px) and (max-width: 600px) {
+    .deck {
+        width: 85%;
+        height: 33em;
+        padding: 0.5em;
+    }
+
+    .deck .card {
+        height: 98px;
+        width: 98px;
+    }
+
+    .move-span {
+        position: absolute;
+        left: 165px
+    }
+
+    .message {
+        font-size: 1.5em;
+    }
+
+    .modal-restart {
+        left: 95%;
+        font-size: 1em;
+    }
+}
+
+@media screen and (min-width: 420px) and (max-width: 500px) {
+    .deck {
+        width: 85%;
+        height: 30em;
+        padding: 0.4em;
+    }
+
+    .deck .card {
+        height: 82.5px;
+        width: 82.5px;
+    }
+
+    .move-span {
+        position: absolute;
+        left: 162px
+    }
+
+    .message {
+        font-size: 1.5em;
+        margin-bottom: 1em;
+    }
+}
+
+@media screen and (max-width: 419px) {
+    .deck {
+        width: 83%;
+        height: 27.5em;
+        padding: 0.3em;
+    }
+
+    .deck .card {
+        height: 75.5px;
+        width: 75.5px;
+    }
+
+    .score-panel {
+        width: 75%
+    }
+
+    .move-span {
+        position: absolute;
+        left: 147px
+    }
+
+    .modal-restart {
+        left: 92%;
+        font-size: 1em;
+    }
+
+    .message {
+        font-size: 1.25em;
+        margin-bottom: 0.6em;
+    }
+}

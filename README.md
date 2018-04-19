@@ -1,10 +1,7 @@
 # Memory Game Project
 
-* [Instructions](#instructions)
-* [Contributing](#contributing)
-
 HOW THE GAME WORKS
-Playe needs to find 8 matching pairs
+Player needs to find 8 matching pairs
 
 Cards will be placed randomly onto the deck.
 

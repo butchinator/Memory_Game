@@ -77,6 +77,7 @@ function cardClick() {
         clickedCard = event.target;
         if (clickedCard.className === "card" && openedCards.length < 2) {
             turnCard(event);
+            startTime();
             addOpenedCard(event);
         } else {
             event.stopPropagation();
@@ -96,9 +97,6 @@ function addOpenedCard(event) {
     openedCards.push(clickedCard);
     if (openedCards.length == 2) {
         addMove()
-        if (moves == 1) {
-            startTime()
-        }
         starRating()
         if (openedCards[0].innerHTML === openedCards[1].innerHTML) {
             matchedCard();

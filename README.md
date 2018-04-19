@@ -6,11 +6,11 @@ Player needs to find 8 matching pairs
 
 Cards will be placed randomly onto the deck.
 
-When a card is clicked the card will turn.
+When a card is clicked the card will turn and the clock will start.
 
 A second card must then be clicked.
 
-Once two cards have been turned the time will start and the move counter will plus one.
+Once two cards have been turned the move counter will plus one.
 
 If the cards match the cards will remain turned
 

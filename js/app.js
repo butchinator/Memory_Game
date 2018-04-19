@@ -20,7 +20,7 @@ let starsScore;
 let endMessage;
 
 const timer = document.querySelector('#timer');
-let time;
+let time = 0;
 let sec = 0;
 let min = 0;
 
@@ -77,7 +77,6 @@ function cardClick() {
         clickedCard = event.target;
         if (clickedCard.className === "card" && openedCards.length < 2) {
             turnCard(event);
-            startTime();
             addOpenedCard(event);
         } else {
             event.stopPropagation();
@@ -95,6 +94,10 @@ function turnCard(event) {
 // add to openedCards array
 function addOpenedCard(event) {
     openedCards.push(clickedCard);
+    if(time === 0){
+        time ++
+        startTime();
+    }
     if (openedCards.length == 2) {
         addMove()
         starRating()
@@ -116,6 +119,7 @@ function matchedCard() {
     openedCards[1].classList.toggle('match');
     matchedCards.push(openedCards);
     clearCards();
+    console.log(matchedCards.length);
 };
 
 // if the cards do not match
@@ -153,7 +157,8 @@ function startTime() {
         };
         if (sec === 60) {
             min++
-            sec = 00;
+            sec = 0;
+            sec = '0' + sec;
         };
         timer.innerHTML = min + ':' + sec;
     }, 1000);
@@ -162,6 +167,7 @@ function startTime() {
 // stop the timer
 function stopTime() {
     clearInterval(time);
+    time = 0;
     sec = 0;
     min = 0;
 };

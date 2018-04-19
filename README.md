@@ -14,6 +14,7 @@ The game will end once all matches have been found.
 
 SCORE
 4 possible ratings: 3 stars, 2 stars, 1 star, no stars.
+
 3 stars for game completion in up to 14 moves.
 2 stars for game completion between 15 and 18 moves.
 1 star for game completion between 19 and 24 moves.
